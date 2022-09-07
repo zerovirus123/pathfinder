@@ -6,7 +6,7 @@ START_NODE_COL,
 START_NODE_ROW, 
 NUM_ROWS, 
 NUM_COLS} from "../GUI/grid";
-import { animatePath, animateShortestPath } from "../GUI/visualize";
+import { animatePath } from "../GUI/visualize";
 
 export function bfs(grid) {
     clearGrid(grid);
