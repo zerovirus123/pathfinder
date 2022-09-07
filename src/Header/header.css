@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@1&display=swap');
+
+.header__container{
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+}

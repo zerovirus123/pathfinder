@@ -1,0 +1,14 @@
+.grid {
+  margin: 100px 0 0;
+}
+
+.button__container
+{
+  display: block;
+  padding-bottom: 2rem;
+
+}
+
+.button{
+  font-size: 25px;
+}
