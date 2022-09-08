@@ -9,7 +9,7 @@ import {
 } from "../GUI/grid";
 import {
     animatePath,
-    animateShortestPath
+    createShortestPath
 } from "../GUI/visualize";
 
 export function dfs(grid) {
@@ -59,17 +59,6 @@ export function dfs(grid) {
     }
     let shortestPath = createShortestPath(currentNode);
     animatePath(visitedNodesInOrder, shortestPath, foundNode);
-}
-
-function createShortestPath(currentNode) {
-    let shortestPath = [];
-
-    while (currentNode.previousNode !== null) {
-        shortestPath.push(currentNode);
-        currentNode = currentNode.previousNode;
-    }
-
-    return shortestPath.reverse();
 }
 
 function checkBounds(node) {

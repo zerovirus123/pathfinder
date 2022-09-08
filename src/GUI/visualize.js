@@ -41,3 +41,13 @@ export function animateShortestPath(nodesInShortestPathOrder) {
     }
 }
 
+export function createShortestPath(currentNode) {
+    let shortestPath = [];
+
+    while (currentNode.previousNode !== null) {
+        shortestPath.push(currentNode);
+        currentNode = currentNode.previousNode;
+    }
+
+    return shortestPath.reverse();
+}

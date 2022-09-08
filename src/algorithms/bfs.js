@@ -6,7 +6,8 @@ START_NODE_COL,
 START_NODE_ROW, 
 NUM_ROWS, 
 NUM_COLS} from "../GUI/grid";
-import { animatePath } from "../GUI/visualize";
+import { animatePath, 
+createShortestPath } from "../GUI/visualize";
 
 export function bfs(grid) {
     clearGrid(grid);
@@ -58,19 +59,6 @@ export function bfs(grid) {
     
     let shortestPath = createShortestPath(currentNode);
     animatePath(visitedNodesInOrder, shortestPath, foundNode);   
-}
-
-function createShortestPath(currentNode)
-{
-    let shortestPath = [];
-
-    while(currentNode.previousNode !== null)
-    {
-        shortestPath.push(currentNode);
-        currentNode = currentNode.previousNode;
-    }
-
-    return shortestPath.reverse();
 }
 
 function checkBounds(node){
