@@ -15,6 +15,7 @@ import {dijkstra,
 
 import {bfs} from "./../algorithms/bfs";
 import {dfs} from "./../algorithms/dfs";
+import {a_star} from "./../algorithms/a_star";
 
 import Header from '../Header/Header';
 
@@ -98,13 +99,18 @@ export default class GUI extends Component{
               </button>
               <button className="button" onClick={() => {
                   bfs(this.state.grid);
-              }}>
+                }}>
                   Breadth First Search
               </button>
               <button className="button" onClick={() => {
                   dfs(this.state.grid);
-              }}>
+                }}>
                   Depth First Search
+              </button>
+              <button className="button" onClick={() => {
+                  a_star(this.state.grid);
+                }}>
+                   A* Search
               </button>
               <br></br>
               <button className="button" onClick={() => {
@@ -113,6 +119,7 @@ export default class GUI extends Component{
                 }}>
                   Randomize Start and End Nodes
               </button>
+              
            </div>
            
            <div className="grid">
