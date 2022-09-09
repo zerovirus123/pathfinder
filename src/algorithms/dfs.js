@@ -32,8 +32,6 @@ export function dfs(grid) {
 
         if (isSameNode(currentNode, finishNode)) {
             currentNode.isVisited = true;
-            console.log("Found destination node");
-            console.log("X, Y: " + currentNode.row + ", " + currentNode.col)
             foundNode = true
             break;
         } else {

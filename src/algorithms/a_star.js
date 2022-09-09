@@ -125,8 +125,6 @@ export function a_star(grid) {
         if (isSameNode(currentNode, finishNode))
         {
             foundNode = true;
-            console.log("Found finish node.");
-            console.log("Finish Node location: " + finishNode.row + ", " + finishNode.col);
             break;
         }
 
