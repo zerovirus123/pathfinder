@@ -20,6 +20,7 @@ import {a_star} from "./../algorithms/a_star";
 import Header from '../Header/Header';
 
 import "./Dropdown/dropdown.css";
+import { animateDropdown } from './Dropdown/dropdown';
 
 export default class GUI extends Component{
 
@@ -28,7 +29,7 @@ export default class GUI extends Component{
         this.state = {
             grid: [],
             mouseIsPressed: false,
-            isDropdownActive: false
+            isDropdownActive: true
         };
     }
 
@@ -91,27 +92,30 @@ export default class GUI extends Component{
 
         return(<>
            <div className="gui__container">
-              <Header></Header>
-              <div className="button__container">
-              <button className="button" onClick={() => {
-                  randomizeStartAndEnd()
-                  this.redrawGrid()
-                }}>
+                <Header></Header>
+                <div className="button__container">
+                  <button className="button" onClick={() => {
+                      randomizeStartAndEnd()
+                      this.redrawGrid()
+                  }}>
                   Randomize Start and End Nodes
-              </button>
-              <div className="dropdown">
-                <div className="dropdown-btn" onClick={() => {this.toggleDropdown()}}>
+                  </button>
+                  <div className="dropdown">
+                <div className="dropdown__btn" onClick={() => {
+                        this.toggleDropdown()
+                        animateDropdown(this.state.isDropdownActive)
+                    }}>
                     Choose an Algorithm
                 </div>
-                {this.state.isDropdownActive && (
-                      <div className="dropdown-content">
-                      <div className="dropdown-item" onClick={() => {bfs(this.state.grid)}}>BFS</div>
-                      <div className="dropdown-item" onClick={() => {dfs(this.state.grid)}}>DFS</div>
-                      <div className="dropdown-item" onClick={() => {this.runPathFinder()}}>Dijkstra</div>
-                      <div className="dropdown-item" onClick={() => {a_star(this.state.grid)}}>A*</div>
-                      </div>
-                )}
-                </div>
+                   {/* {this.state.isDropdownActive && ( */}
+                       <ul className="dropdown__content" id="dropdown__content">
+                         <li className="dropdown__item" onClick={() => {bfs(this.state.grid)}}>BFS</li>
+                         <li className="dropdown__item" onClick={() => {dfs(this.state.grid)}}>DFS</li>
+                         <li className="dropdown__item" onClick={() => {this.runPathFinder()}}>Dijkstra</li>
+                         <li className="dropdown__item" onClick={() => {a_star(this.state.grid)}}>A*</li>
+                        </ul>
+                   {/* )} */}
+                  </div>
                 </div>
 
                 <div className="grid">

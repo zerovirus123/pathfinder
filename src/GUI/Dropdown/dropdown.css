@@ -1,11 +1,16 @@
-.dropdown{
-    margin: 2rem auto;
+ul{
+    list-style-type: none;
+    padding: 0;
 }
 
-.dropdown .dropdown-btn{
+.dropdown{
+    margin: 2rem auto;
+    margin-bottom: 14rem;
+}
+
+.dropdown .dropdown__btn{
     width: fit-content;
     margin: auto;
-    left:0;
     padding: 15px 20px;
     background: #fff;
     box-shadow: 3px 3px 10px 6px rgba(0,0,0,0.4);
@@ -15,38 +20,52 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 12px;
-    /* position: absolute; */
+    cursor: pointer;
 }
 
-.dropdown .dropdown-content{
-    width: fit-content;
+.dropdown .dropdown__content{
+    position: absolute;
+    width: 5%;
     margin: auto;
-    padding: 15px;
-    background: #fff;
+    left: 0;
+    right: 0;
+    background: #fefefe;
     box-shadow: 3px 3px 10px 6px rgba(0,0,0,0.4);
     font-weight: 500px;
     color: #333;
     border-radius: 2px;
-    transition: all 0.5s ease-in-out;
-    /* transform: scaleY(0); */
+    transition: all 0.2s ease-in-out;
+    transform: scaleY(0);
+    visibility: hidden;
 }
 
-.dropdown-content:target{
-    transform: scaleY(1);
-}
-
-.dropdown .dropdown-content .dropdown-item{
+.dropdown .dropdown__content .dropdown__item{
     padding: 10px;
     cursor: pointer;
     transition: all 0.2s;
-    border: 2px;
+    left: 0;
+    right: 0;
+    transition: .2s all ease-in-out;
+    /* opacity: 0; */
+    border: 1px solid #000;
 }
 
-.dropdown-item.target{
-    height: auto;
+.dropdown__content .fadein{
+    animation: fadeIn 0.9s 1;
+    animation-fill-mode: forwards;
 }
 
-.dropdown .dropdown-content .dropdown-item:hover{
+.dropdown .dropdown__content .dropdown__item:hover{
     background: #4e4a4a;
     color: #fff;
+    transform: translateX(5px);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
