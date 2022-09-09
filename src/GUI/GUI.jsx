@@ -8,7 +8,7 @@ import {getInitialGrid,
         FINISH_NODE_ROW, 
         FINISH_NODE_COL} from './grid';
 import Node from './Node/Node';
-import {animateDijkstra, animatePath} from "./visualize"
+import {animatePath} from "./visualize"
 
 import {dijkstra, 
        getNodesInShortestPathOrder} from"./../algorithms/dijkstra";
@@ -19,6 +19,8 @@ import {a_star} from "./../algorithms/a_star";
 
 import Header from '../Header/Header';
 
+import "./Dropdown/dropdown.css";
+
 export default class GUI extends Component{
 
     constructor() {
@@ -26,12 +28,17 @@ export default class GUI extends Component{
         this.state = {
             grid: [],
             mouseIsPressed: false,
-            showModal: false
+            isDropdownActive: false
         };
     }
 
     toggleModal = () => {
         this.setState({showModal: !this.state.showModal});
+    }
+
+    toggleDropdown = () => 
+    {
+        this.setState({isDropdownActive: !this.state.isDropdownActive});
     }
 
     componentDidMount() {
@@ -83,40 +90,32 @@ export default class GUI extends Component{
         const {grid, mouseIsPressed} = this.state;
 
         return(<>
-           <Header></Header>
-           <div className="button__container">
-              <button className="button" onClick={() => {
-                  this.runPathFinder()
-                }}>
-                  Dijkstra's Algorithm
-              </button>
-              <button className="button" onClick={() => {
-                  bfs(this.state.grid);
-                }}>
-                  Breadth First Search
-              </button>
-              <button className="button" onClick={() => {
-                  dfs(this.state.grid);
-                }}>
-                  Depth First Search
-              </button>
-              <button className="button" onClick={() => {
-                  a_star(this.state.grid);
-                }}>
-                   A* Search
-              </button>
-              <br></br>
+           <div>
+              <Header></Header>
+              <div className="button__container">
               <button className="button" onClick={() => {
                   randomizeStartAndEnd()
                   this.redrawGrid()
                 }}>
                   Randomize Start and End Nodes
               </button>
-              
-           </div>
-           
-           <div className="grid">
-              {grid.map((row, rowIdx) => {
+              <div className="dropdown">
+                <div className="dropdown-btn" onClick={() => {this.toggleDropdown()}}>
+                    Choose an Algorithm
+                </div>
+                {this.state.isDropdownActive && (
+                      <div className="dropdown-content">
+                      <div className="dropdown-item" onClick={() => {bfs(this.state.grid)}}>BFS</div>
+                      <div className="dropdown-item" onClick={() => {dfs(this.state.grid)}}>DFS</div>
+                      <div className="dropdown-item" onClick={() => {this.runPathFinder()}}>Dijkstra</div>
+                      <div className="dropdown-item" onClick={() => {a_star(this.state.grid)}}>A*</div>
+                      </div>
+                )}
+                </div>
+                </div>
+
+                <div className="grid">
+                {grid.map((row, rowIdx) => {
                   return(
                     <div key={rowIdx}>
                     {row.map((node, nodeIdx) => {
@@ -140,7 +139,8 @@ export default class GUI extends Component{
                     })}
                     </div>
                   );
-               })}
+              })}
+              </div>
            </div>
         </>)
     }
