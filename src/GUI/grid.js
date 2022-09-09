@@ -98,3 +98,27 @@ export const getNewGridWithWallToggled = (grid, row, col) => {
     newGrid[row][col] = newNode;
     return newGrid;
 };
+
+export function checkBounds(node) {
+    return (node.row >= 0 && node.col >= 0 && node.row < NUM_ROWS && node.col < NUM_COLS);
+}
+
+export function getNodePosition(node) {
+    return [node.row, node.col];
+}
+
+export function isSameNode(node1, node2) {
+    return (node1.row === node2.row && node1.col === node2.col);
+}
+
+export function checkNeighbor(currentNode, neighborNode, neighborRow, neighborCol, neighbors, visitedNodesInOrder) {
+    if (!neighborNode.isVisited && !neighborNode.isWall && checkBounds(neighborNode)) {
+        neighborNode.row = neighborRow;
+        neighborNode.col = neighborCol;
+        neighborNode.isVisited = true;
+        neighborNode.previousNode = currentNode;
+        neighbors.push(neighborNode);
+        visitedNodesInOrder.push(neighborNode);
+    }
+    return neighbors;
+}

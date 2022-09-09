@@ -1,11 +1,12 @@
 import {
     clearGrid,
+    checkBounds,
+    checkNeighbor,
+    isSameNode,
     FINISH_NODE_COL,
     FINISH_NODE_ROW,
     START_NODE_COL,
     START_NODE_ROW,
-    NUM_ROWS,
-    NUM_COLS
 } from "../GUI/grid";
 import {
     animatePath,
@@ -29,7 +30,7 @@ export function dfs(grid) {
         currentNode = stack.pop();
         currentNode.isVisited = true;
 
-        if (currentNode.row === finishNode.row && currentNode.col === finishNode.col) {
+        if (isSameNode(currentNode, finishNode)) {
             currentNode.isVisited = true;
             console.log("Found destination node");
             console.log("X, Y: " + currentNode.row + ", " + currentNode.col)
@@ -59,20 +60,4 @@ export function dfs(grid) {
     }
     let shortestPath = createShortestPath(currentNode);
     animatePath(visitedNodesInOrder, shortestPath, foundNode);
-}
-
-function checkBounds(node) {
-    return (node.row >= 0 && node.col >= 0 && node.row < NUM_ROWS && node.col < NUM_COLS);
-}
-
-function checkNeighbor(currentNode, childNode, neighborRow, neighborCol, stack, visitedNodesInOrder) {
-    if (!childNode.isVisited && !childNode.isWall && checkBounds(childNode)) {
-        childNode.row = neighborRow;
-        childNode.col = neighborCol;
-        childNode.isVisited = true;
-        childNode.previousNode = currentNode;
-        stack.push(childNode);
-        visitedNodesInOrder.push(childNode);
-    }
-    return stack;
 }

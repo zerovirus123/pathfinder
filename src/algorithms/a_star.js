@@ -1,6 +1,10 @@
 /* eslint-disable no-loop-func */
 import {
     clearGrid,
+    checkBounds,
+    checkNeighbor,
+    getNodePosition,
+    isSameNode,
     FINISH_NODE_COL,
     FINISH_NODE_ROW,
     START_NODE_COL,
@@ -161,7 +165,6 @@ export function a_star(grid) {
                     count++;
                     open_set_queue.enqueue({node: neighbor, neighborScore: f_score[getNodePosition(neighbor)]}, count);
                     open_set_hash.add(neighbor);
-                    visitedNodesInOrder.push(neighbor);
                 }
             }
         });
@@ -170,29 +173,4 @@ export function a_star(grid) {
     startNode.previousNode = null; // not proud of this, but currently could not find the root cause of the previous node bug
     let shortestPath = createShortestPath(currentNode);
     animatePath(visitedNodesInOrder, shortestPath, foundNode);
-}
-
-function getNodePosition(node){
-    return [node.row, node.col];
-}
-
-function isSameNode(node1, node2)
-{
-    return (node1.row === node2.row && node1.col === node2.col);
-}
-
-function checkBounds(node) {
-    return (node.row >= 0 && node.col >= 0 && node.row < NUM_ROWS && node.col < NUM_COLS);
-}
-
-function checkNeighbor(currentNode, neighborNode, neighborRow, neighborCol, neighbors, visitedNodesInOrder) {
-    if (!neighborNode.isVisited && !neighborNode.isWall && checkBounds(neighborNode)) {
-        neighborNode.row = neighborRow;
-        neighborNode.col = neighborCol;
-        neighborNode.isVisited = true;
-        neighborNode.previousNode = currentNode;
-        neighbors.push(neighborNode);
-        visitedNodesInOrder.push(neighborNode);
-    }
-    return neighbors;
 }
