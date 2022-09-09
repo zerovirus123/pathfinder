@@ -90,7 +90,7 @@ export default class GUI extends Component{
         const {grid, mouseIsPressed} = this.state;
 
         return(<>
-           <div>
+           <div className="gui__container">
               <Header></Header>
               <div className="button__container">
               <button className="button" onClick={() => {
