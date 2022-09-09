@@ -71,19 +71,12 @@ export default class GUI extends Component{
 
     runPathFinder()
     {
-        let startTime = performance.now();
         const nodesInfo = this.visualizeDijkstra();
-        let endTime = performance.now();
-        let runtime = endTime - startTime;
         const visitedNodesInOrder = nodesInfo[0];
         const nodesInShortestPathOrder = nodesInfo[1];
         let foundNode = true
         if (nodesInShortestPathOrder.length <= 1) foundNode = false
         animatePath(visitedNodesInOrder, nodesInShortestPathOrder, foundNode);
-
-        console.log("Time taken: " + runtime + "ms.");
-        console.log("Steps taken: " + nodesInShortestPathOrder.length);
-        return [runtime, nodesInShortestPathOrder.length];
     }
 
     render() {
@@ -93,7 +86,7 @@ export default class GUI extends Component{
            <Header></Header>
            <div className="button__container">
               <button className="button" onClick={() => {
-                  let runInfo = this.runPathFinder()
+                  this.runPathFinder()
                 }}>
                   Dijkstra's Algorithm
               </button>
