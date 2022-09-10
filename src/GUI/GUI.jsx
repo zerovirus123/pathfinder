@@ -22,6 +22,8 @@ import Header from '../Header/Header';
 import "./Dropdown/dropdown.css";
 import { animateDropdown } from './Dropdown/dropdown';
 
+import { generatePrims } from './maze';
+
 export default class GUI extends Component{
 
     constructor() {
@@ -100,24 +102,40 @@ export default class GUI extends Component{
                   }}>
                   Randomize Start and End Nodes
                   </button>
-                  <div className="dropdown">
-                <div className="dropdown__btn" onClick={() => {
-                        this.toggleDropdown()
-                        animateDropdown(this.state.isDropdownActive)
-                    }}>
-                    Choose an Algorithm
-                </div>
-                   {/* {this.state.isDropdownActive && ( */}
-                       <ul className="dropdown__content" id="dropdown__content">
-                         <li className="dropdown__item" onClick={() => {bfs(this.state.grid)}}>BFS</li>
-                         <li className="dropdown__item" onClick={() => {dfs(this.state.grid)}}>DFS</li>
-                         <li className="dropdown__item" onClick={() => {this.runPathFinder()}}>Dijkstra</li>
-                         <li className="dropdown__item" onClick={() => {a_star(this.state.grid)}}>A*</li>
-                        </ul>
-                   {/* )} */}
-                  </div>
-                </div>
 
+                  <div className="dropdown__container">
+                    <div className="dropdown">
+                       <div className="dropdown__btn" onClick={() => {
+                        this.toggleDropdown()
+                        animateDropdown(this.state.isDropdownActive, "dropdown__algorithm")
+                       }}>
+                       Choose an Algorithm
+                       </div>
+                     <ul className="dropdown__content" id="dropdown__algorithm">
+                        <li className="dropdown__item" onClick={() => {bfs(this.state.grid)}}>BFS</li>
+                        <li className="dropdown__item" onClick={() => {dfs(this.state.grid)}}>DFS</li>
+                        <li className="dropdown__item" onClick={() => {this.runPathFinder()}}>Dijkstra</li>
+                        <li className="dropdown__item" onClick={() => {a_star(this.state.grid)}}>A*</li>
+                     </ul>
+                    </div>
+                    <div className="dropdown">
+                       <div className="dropdown__btn" onClick={() => {
+                        this.toggleDropdown()
+                        animateDropdown(this.state.isDropdownActive, "dropdown__maze")
+                       }}>
+                       Choose a Maze Generator
+                       </div>
+                       <ul className="dropdown__content" id="dropdown__maze">
+                          <li className="dropdown__item" onClick={() => {
+                            this.state.grid = generatePrims(this.state.grid)
+                            }}>Prim</li>
+                          <li className="dropdown__item">Kruskal</li>
+                        </ul>
+                    </div>
+                  </div>
+
+                </div>
+                
                 <div className="grid">
                 {grid.map((row, rowIdx) => {
                   return(

@@ -3,9 +3,14 @@ ul{
     padding: 0;
 }
 
+.dropdown__container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .dropdown{
-    margin: 2rem auto;
-    margin-bottom: 14rem;
+    margin: 2rem;
+    margin-bottom: -4rem;
 }
 
 .dropdown .dropdown__btn{
@@ -24,8 +29,8 @@ ul{
 }
 
 .dropdown .dropdown__content{
-    position: absolute;
-    width: 5%;
+    /* position: absolute; */
+    width: fit-content;
     margin: auto;
     left: 0;
     right: 0;
@@ -46,7 +51,6 @@ ul{
     left: 0;
     right: 0;
     transition: .2s all ease-in-out;
-    /* opacity: 0; */
     border: 1px solid #000;
 }
 

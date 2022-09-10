@@ -122,3 +122,23 @@ export function checkNeighbor(currentNode, neighborNode, neighborRow, neighborCo
     }
     return neighbors;
 }
+
+function selectRandomNode(grid) {
+    let success = false;
+
+    let randomNode;
+
+    while (!success) {
+        let randomRow = Math.floor(Math.random() * NUM_ROWS);
+        let randomCol = Math.floor(Math.random() * NUM_COLS);
+
+        if (!isSameNode(grid[randomRow][randomCol], grid[START_NODE_ROW][START_NODE_COL]) &&
+            !isSameNode(grid[randomRow][randomCol], grid[FINISH_NODE_ROW][FINISH_NODE_COL])
+        ) {
+            success = true;
+            randomNode = grid[randomRow][randomCol];
+        }
+    }
+
+    return randomNode
+}

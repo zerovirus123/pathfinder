@@ -1,6 +1,6 @@
-export function animateDropdown(toggleState)
+export function animateDropdown(toggleState, id)
 {
-    let dropdownContent = document.getElementById("dropdown__content");
+    let dropdownContent = document.getElementById(id);
 
     if(toggleState)
     {
@@ -21,5 +21,4 @@ export function animateDropdown(toggleState)
             node.classList.remove("fadein");
         });
     }
-
 }
