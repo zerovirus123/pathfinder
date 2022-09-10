@@ -4,7 +4,7 @@ START_NODE_COL,
 FINISH_NODE_ROW,
 FINISH_NODE_COL,
 NUM_ROWS,
-NUM_COLS } from "./grid";
+NUM_COLS } from "../GUI/grid";
 
 
 function isNodeAWall(node) {
@@ -158,6 +158,23 @@ function invertNodes(grid)
 }
 
 export function generatePrims(grid) {
+
+    /**
+     * 
+     * Generates a maze using prim's algorithm
+        Pseudo code:
+        1. Set all nodes to be walls (except start and finish nodes)
+        3. Get frontier fs of start node and add to the frontier set that contains all frontier cells
+        4. while s is not empty:
+            4a. Pick a random frontier node from the frontier set
+            4b. Get neighbour nodes ns of the random frontier node
+            4c. Connect random frontier node with random neighbour node from ns
+            4d. Add the frontier nodes of the random frontier node to the frontier set
+            4e. Remove the random node from the frontier set.
+        5. Invert the whole grid (passages to walls, vice versa). This is specific to this implementation.
+           Not sure if there is a better way, but inverting the logic of every helper function is a hassle ;(
+     *
+     */
 
     grid = initWalls(grid);
     let frontiers = new Set();

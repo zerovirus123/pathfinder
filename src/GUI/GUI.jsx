@@ -22,7 +22,7 @@ import Header from '../Header/Header';
 import "./Dropdown/dropdown.css";
 import { animateDropdown } from './Dropdown/dropdown';
 
-import { generatePrims } from './maze';
+import { generatePrims } from '../maze/prims';
 
 export default class GUI extends Component{
 
