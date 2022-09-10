@@ -23,6 +23,7 @@ import "./Dropdown/dropdown.css";
 import { animateDropdown } from './Dropdown/dropdown';
 
 import { generatePrims } from '../maze/prims';
+import { generateKruskals} from '../maze/kruskals';
 
 export default class GUI extends Component{
 
@@ -127,9 +128,11 @@ export default class GUI extends Component{
                        </div>
                        <ul className="dropdown__content" id="dropdown__maze">
                           <li className="dropdown__item" onClick={() => {
-                            this.state.grid = generatePrims(this.state.grid)
+                            generatePrims(this.state.grid)
                             }}>Prim</li>
-                          <li className="dropdown__item">Kruskal</li>
+                          <li className="dropdown__item" onClick={() => {
+                            generateKruskals(this.state.grid);
+                          }}>Kruskal</li>
                         </ul>
                     </div>
                   </div>

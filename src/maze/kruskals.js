@@ -16,7 +16,7 @@ import {
 }
 from "../maze/utils";
 
-function generateKruskals(grid)
+export function generateKruskals(grid)
 {
 
     grid = initWalls(grid);
