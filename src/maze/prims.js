@@ -7,7 +7,8 @@ NUM_ROWS,
 NUM_COLS } from "../GUI/grid";
 
 import {getNeighborWalls, 
-       isNodeAWall}
+       isNodeAWall,
+       openPathForStartAndFinishNodes}
        from "../maze/utils";
 
 function getFrontiers(grid, node)
@@ -59,20 +60,6 @@ function initWalls(grid)
     }
 
     return grid;
-}
-
-function openPathForStartAndFinishNodes(grid)
-{
-    let nodes = [
-        grid[START_NODE_ROW][START_NODE_COL],
-        grid[FINISH_NODE_ROW][FINISH_NODE_COL]
-    ];
-    
-    nodes.forEach(node =>{
-        let neighbors = getNeighborWalls(grid, node);
-        let neighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
-        tearDownWall(neighbor);
-    });
 }
 
 function invertNodes(grid)
@@ -140,6 +127,7 @@ export function generatePrims(grid) {
     }
 
     grid = invertNodes(grid);
+    openPathForStartAndFinishNodes(grid);
 
     return grid;
 }

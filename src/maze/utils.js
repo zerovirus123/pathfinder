@@ -81,3 +81,16 @@ export function tearDownWall(node) {
     getNodeDOM(node).className = 'node';
     node.isWall = false;
 }
+
+export function openPathForStartAndFinishNodes(grid) {
+    let nodes = [
+        grid[START_NODE_ROW][START_NODE_COL],
+        grid[FINISH_NODE_ROW][FINISH_NODE_COL]
+    ];
+
+    nodes.forEach(node => {
+        let neighbors = getNeighborWalls(grid, node);
+        let neighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+        tearDownWall(neighbor);
+    });
+}
