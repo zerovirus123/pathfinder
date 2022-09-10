@@ -24,7 +24,6 @@ export const clearGrid = (grid) => {
             else if (node.isFinish) {
                 node.isVisited = false;
                 node.distance = Infinity;
-                // document.getElementById(`node-${node.row}-${node.col}`).className = 'node-finish';
             }
         }
         grid.push(currentRow);

@@ -6,71 +6,9 @@ FINISH_NODE_COL,
 NUM_ROWS,
 NUM_COLS } from "../GUI/grid";
 
-
-function isNodeAWall(node) {
-    if (node.isWall && checkBounds(node)) {
-        return true;
-    }
-
-    return false;
-}
-
-function getNeighborWalls(grid, node) {
-
-    let neighbors = [];
-
-    try {
-        let leftNeighbor = grid[node.row][node.col - 1];
-        if (isNodeAWall(leftNeighbor)) neighbors.push(leftNeighbor);
-    } catch (err) {}
-
-    try {
-        let rightNeighbor = grid[node.row][node.col + 1];
-        if (isNodeAWall(rightNeighbor)) neighbors.push(rightNeighbor);
-
-    } catch (err) {}
-
-    try {
-        let topNeighbor = grid[node.row - 1][node.col];
-        if (isNodeAWall(topNeighbor)) neighbors.push(topNeighbor);
-    } catch (err) {}
-
-    try {
-        let bottomNeighbor = grid[node.row + 1][node.col];
-        if (isNodeAWall(bottomNeighbor)) neighbors.push(bottomNeighbor);
-    } catch (err) {}
-
-    return neighbors;
-}
-
-function getRandomNeighborWall(grid, node) {
-    let neighbors = [];
-
-    try {
-        let leftNeighbor = grid[node.row][node.col - 1];
-        if (isNodeAWall(leftNeighbor)) neighbors.push(leftNeighbor);
-    } catch (err) {}
-
-    try {
-        let rightNeighbor = grid[node.row][node.col + 1];
-        if (isNodeAWall(rightNeighbor)) neighbors.push(rightNeighbor);
-
-    } catch (err) {}
-
-    try {
-        let topNeighbor = grid[node.row - 1][node.col];
-        if (isNodeAWall(topNeighbor)) neighbors.push(topNeighbor);
-    } catch (err) {}
-
-    try {
-        let bottomNeighbor = grid[node.row + 1][node.col];
-        if (isNodeAWall(bottomNeighbor)) neighbors.push(bottomNeighbor);
-    } catch (err) {}
-
-    let randomIndex = Math.floor(Math.random() * neighbors.length);
-
-    return neighbors[randomIndex];
-}
+import {getNeighborWalls, 
+       isNodeAWall}
+       from "../maze/utils";
 
 function getFrontiers(grid, node)
 {
