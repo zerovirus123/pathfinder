@@ -1,5 +1,6 @@
 import {
     checkBounds,
+    getNodeDOM,
     START_NODE_ROW,
     START_NODE_COL,
     FINISH_NODE_ROW,
@@ -71,10 +72,6 @@ export function getRandomNeighborWall(grid, node) {
     let randomIndex = Math.floor(Math.random() * neighbors.length);
 
     return neighbors[randomIndex];
-}
-
-export function getNodeDOM(node) {
-    return document.getElementById(`node-${node.row}-${node.col}`);
 }
 
 export function tearDownWall(node) {

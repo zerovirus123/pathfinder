@@ -122,7 +122,7 @@ export function checkNeighbor(currentNode, neighborNode, neighborRow, neighborCo
     return neighbors;
 }
 
-function selectRandomNode(grid) {
+export function selectRandomNode(grid) {
     let success = false;
 
     let randomNode;
@@ -140,4 +140,26 @@ function selectRandomNode(grid) {
     }
 
     return randomNode
+}
+
+export function getNodeDOM(node) {
+    return document.getElementById(`node-${node.row}-${node.col}`);
+}
+
+export function invertNodes(grid) {
+    for (let row = 0; row < NUM_ROWS; row++) {
+        for (let col = 0; col < NUM_COLS; col++) {
+            if (!grid[row][col].isStart && !grid[row][col].isFinish) {
+                if (grid[row][col].isWall) {
+                    grid[row][col].isWall = false;
+                    getNodeDOM(grid[row][col]).className = 'node';
+
+                } else {
+                    grid[row][col].isWall = true;
+                    getNodeDOM(grid[row][col]).className = 'node node-wall';
+                }
+            }
+        }
+    }
+    return grid;
 }

@@ -1,4 +1,5 @@
 import { checkBounds,
+invertNodes,
 START_NODE_ROW,
 START_NODE_COL,
 FINISH_NODE_ROW,
@@ -47,26 +48,6 @@ function getNodeDOM(node) {
 function tearDownWall(node){
     getNodeDOM(node).className = 'node';
     node.isWall = false;
-}
-
-function invertNodes(grid)
-{
-    for (let row = 0; row < NUM_ROWS; row++) {
-        for (let col = 0; col < NUM_COLS; col++) {
-            if(!grid[row][col].isStart && !grid[row][col].isFinish)
-            {
-                if (grid[row][col].isWall) {
-                    grid[row][col].isWall = false;
-                    getNodeDOM(grid[row][col]).className = 'node';
-
-                } else {
-                    grid[row][col].isWall = true;
-                    getNodeDOM(grid[row][col]).className = 'node node-wall';
-                }
-            }
-        }
-    }
-    return grid;
 }
 
 export function generatePrims(grid) {
