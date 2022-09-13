@@ -1,10 +1,5 @@
 import {
-    checkBounds,
     invertNodes,
-    START_NODE_ROW,
-    START_NODE_COL,
-    FINISH_NODE_ROW,
-    FINISH_NODE_COL,
     NUM_ROWS,
     NUM_COLS
 } from "../GUI/grid";
@@ -12,7 +7,6 @@ import {
 import {
     getNeighborWalls,
     initWalls,
-    isNodeAWall,
     openPathForStartAndFinishNodes,
     tearDownWall,
 }
