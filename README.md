@@ -1,6 +1,6 @@
 # Pathfinder Algorithm Visualizer
 
-![alt text](https://github.com/zerovirus123/pathfinder/public/example.png?raw=true)
+![alt text](https://github.com/zerovirus123/pathfinder/tree/master/public/example.png?raw=true)
 
 Base version of the code implemented by Clement Mihalescu (https://github.com/clementmihailescu/Pathfinding-Visualizer).
 
