@@ -8,8 +8,9 @@ START_NODE_COL,
 import {getNeighborWalls,
        initWalls,
        isNodeAWall,
-       openPathForStartAndFinishNodes}
-       from "../maze/utils";
+       openPathForStartAndFinishNodes,
+       tearDownWall}
+from "../maze/utils";
 
 function getFrontiers(grid, node)
 {
@@ -43,11 +44,6 @@ function getFrontiers(grid, node)
 
 function getNodeDOM(node) {
     return document.getElementById(`node-${node.row}-${node.col}`);
-}
-
-function tearDownWall(node){
-    getNodeDOM(node).className = 'node';
-    node.isWall = false;
 }
 
 export function generatePrims(grid) {
