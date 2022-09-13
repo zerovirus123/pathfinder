@@ -1,14 +1,13 @@
 import { 
 clearGrid,
-checkBounds,
 checkNeighbor,
+isPositionWithinBounds,
 isSameNode,
 FINISH_NODE_COL, 
 FINISH_NODE_ROW, 
 START_NODE_COL, 
 START_NODE_ROW, 
-NUM_ROWS, 
-NUM_COLS} from "../GUI/grid";
+} from "../GUI/grid";
 import { animatePath, 
 createShortestPath } from "../GUI/visualize";
 
@@ -35,26 +34,25 @@ export function bfs(grid) {
             break;
         }else{
          
-            try{
-                let leftChild = grid[currentNode.row][currentNode.col-1];
+            if (isPositionWithinBounds(currentNode.row, currentNode.col - 1)) {
+                let leftChild = grid[currentNode.row][currentNode.col - 1];
                 queue = checkNeighbor(currentNode, leftChild, currentNode.row, currentNode.col - 1, queue, visitedNodesInOrder);
             }
-            catch(err){}
 
-            try {
+            if (isPositionWithinBounds(currentNode.row, currentNode.col + 1)) {
                 let rightChild = grid[currentNode.row][currentNode.col + 1];
                 queue = checkNeighbor(currentNode, rightChild, currentNode.row, currentNode.col + 1, queue, visitedNodesInOrder);
-            } catch (err) {}
+            }
 
-            try {
+            if (isPositionWithinBounds(currentNode.row - 1, currentNode.col)) {
                 let topChild = grid[currentNode.row - 1][currentNode.col];
                 queue = checkNeighbor(currentNode, topChild, currentNode.row - 1, currentNode.col, queue, visitedNodesInOrder);
-            } catch (err) {}
+            }
 
-            try {
+            if (isPositionWithinBounds(currentNode.row + 1, currentNode.col)) {
                 let bottomChild = grid[currentNode.row + 1][currentNode.col];
                 queue = checkNeighbor(currentNode, bottomChild, currentNode.row + 1, currentNode.col, queue, visitedNodesInOrder);
-            } catch (err) {}
+            }
         }
     }
     

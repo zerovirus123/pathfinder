@@ -102,6 +102,11 @@ export function checkBounds(node) {
     return (node.row >= 0 && node.col >= 0 && node.row < NUM_ROWS && node.col < NUM_COLS);
 }
 
+export function isPositionWithinBounds(row, col)
+{
+    return (row >= 0 && col >= 0 && row < NUM_ROWS && col < NUM_COLS);
+}
+
 export function getNodePosition(node) {
     return [node.row, node.col];
 }

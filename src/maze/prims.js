@@ -1,11 +1,9 @@
-import { checkBounds,
+import {
 invertNodes,
+isPositionWithinBounds,
 START_NODE_ROW,
 START_NODE_COL,
-FINISH_NODE_ROW,
-FINISH_NODE_COL,
-NUM_ROWS,
-NUM_COLS } from "../GUI/grid";
+} from "../GUI/grid";
 
 import {getNeighborWalls,
        initWalls,
@@ -17,26 +15,28 @@ function getFrontiers(grid, node)
 {
     let frontiers = [];
 
-    try {
+    if(isPositionWithinBounds(node.row, node.col - 2))
+    {
         let leftNeighbor = grid[node.row][node.col - 2];
         if (isNodeAWall(leftNeighbor)) frontiers.push(leftNeighbor);
-    } catch (err) {}
-
-    try {
+    }
+    
+    if (isPositionWithinBounds(node.row, node.col + 2))
+    {
         let rightNeighbor = grid[node.row][node.col + 2];
         if (isNodeAWall(rightNeighbor)) frontiers.push(rightNeighbor);
+    }
 
-    } catch (err) {}
-
-    try {
+    if (isPositionWithinBounds(node.row - 2, node.col))
+    {
         let topNeighbor = grid[node.row - 2][node.col];
         if (isNodeAWall(topNeighbor)) frontiers.push(topNeighbor);
-    } catch (err) {}
+    }
 
-    try {
+    if (isPositionWithinBounds(node.row + 2, node.col)){
         let bottomNeighbor = grid[node.row + 2][node.col];
         if (isNodeAWall(bottomNeighbor)) frontiers.push(bottomNeighbor);
-    } catch (err) {}
+    }
 
     return frontiers;
 }

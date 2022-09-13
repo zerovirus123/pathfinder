@@ -1,9 +1,9 @@
 /* eslint-disable no-loop-func */
 import {
     clearGrid,
-    checkBounds,
     checkNeighbor,
     getNodePosition,
+    isPositionWithinBounds,
     isSameNode,
     FINISH_NODE_COL,
     FINISH_NODE_ROW,
@@ -130,25 +130,25 @@ export function a_star(grid) {
 
         let neighbors = [];
         
-        try {
+        if (isPositionWithinBounds(currentNode.row, currentNode.col - 1)){
             let leftChild = grid[currentNode.row][currentNode.col - 1];
             neighbors = checkNeighbor(currentNode, leftChild, currentNode.row, currentNode.col - 1, neighbors, visitedNodesInOrder);
-        } catch (err) {}
+        }
 
-        try {
+        if (isPositionWithinBounds(currentNode.row, currentNode.col + 1)) {
             let rightChild = grid[currentNode.row][currentNode.col + 1];
             neighbors = checkNeighbor(currentNode, rightChild, currentNode.row, currentNode.col + 1, neighbors, visitedNodesInOrder);
-        } catch (err) {}
+        } 
 
-        try {
+        if (isPositionWithinBounds(currentNode.row - 1, currentNode.col)) {
             let topChild = grid[currentNode.row - 1][currentNode.col];
             neighbors = checkNeighbor(currentNode, topChild, currentNode.row - 1, currentNode.col, neighbors, visitedNodesInOrder);
-        } catch (err) {}
+        } 
 
-        try {
+        if (isPositionWithinBounds(currentNode.row + 1, currentNode.col)) {
             let bottomChild = grid[currentNode.row + 1][currentNode.col];
             neighbors = checkNeighbor(currentNode, bottomChild, currentNode.row + 1, currentNode.col, neighbors, visitedNodesInOrder);
-        } catch (err) {}
+        } 
 
         neighbors.forEach(neighbor => {
             let temp_g_score = g_score[[currentNode.row, currentNode.col]] + 1;

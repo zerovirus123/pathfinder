@@ -1,7 +1,7 @@
 import {
     clearGrid,
-    checkBounds,
     checkNeighbor,
+    isPositionWithinBounds,
     isSameNode,
     FINISH_NODE_COL,
     FINISH_NODE_ROW,
@@ -35,25 +35,26 @@ export function dfs(grid) {
             foundNode = true
             break;
         } else {
-            try {
+
+            if (isPositionWithinBounds(currentNode.row, currentNode.col - 1)) {
                 let leftChild = grid[currentNode.row][currentNode.col - 1];
                 stack = checkNeighbor(currentNode, leftChild, currentNode.row, currentNode.col - 1, stack, visitedNodesInOrder);
-            } catch (err) {}
+            }
 
-            try {
+            if (isPositionWithinBounds(currentNode.row, currentNode.col + 1)) {
                 let rightChild = grid[currentNode.row][currentNode.col + 1];
                 stack = checkNeighbor(currentNode, rightChild, currentNode.row, currentNode.col + 1, stack, visitedNodesInOrder);
-            } catch (err) {}
+            }
 
-            try {
+            if (isPositionWithinBounds(currentNode.row - 1, currentNode.col)) {
                 let topChild = grid[currentNode.row - 1][currentNode.col];
                 stack = checkNeighbor(currentNode, topChild, currentNode.row - 1, currentNode.col, stack, visitedNodesInOrder);
-            } catch (err) {}
+            }
 
-            try {
+            if (isPositionWithinBounds(currentNode.row + 1, currentNode.col)) {
                 let bottomChild = grid[currentNode.row + 1][currentNode.col];
                 stack = checkNeighbor(currentNode, bottomChild, currentNode.row + 1, currentNode.col, stack, visitedNodesInOrder);
-            } catch (err) {}
+            }
         }
     }
     let shortestPath = createShortestPath(currentNode);
