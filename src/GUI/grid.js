@@ -107,8 +107,14 @@ export function isPositionWithinBounds(row, col)
     return (row >= 0 && col >= 0 && row < NUM_ROWS && col < NUM_COLS);
 }
 
-export function getNodePosition(node) {
+export function getNodePosition(node) 
+{
     return [node.row, node.col];
+}
+
+export function getNodeFromPosition(grid, position)
+{
+    return grid[position[0], position[1]];
 }
 
 export function isSameNode(node1, node2) {
