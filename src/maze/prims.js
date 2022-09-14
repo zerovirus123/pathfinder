@@ -91,7 +91,6 @@ export function generatePrims(grid) {
     }
 
     grid = invertNodes(grid);
-    openPathForStartAndFinishNodes(grid);
 
     return grid;
 }
