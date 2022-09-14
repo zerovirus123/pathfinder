@@ -1,13 +1,11 @@
 import {
-    invertNodes,
     NUM_ROWS,
-    NUM_COLS
+    NUM_COLS,
 } from "../GUI/grid";
 
 import {
     getNeighborWalls,
     initWalls,
-    openPathForStartAndFinishNodes,
     tearDownWall,
 }
 from "../maze/utils";
@@ -17,49 +15,53 @@ import { makeSet,
          union } 
 from "./disjoint-set";
 
-export function generateKruskals(grid)
-{
+export function generateKruskals(grid) {
     grid = initWalls(grid);
-    let MST = {};
-    for(let i = 0; i < NUM_ROWS; i++)
-    {
-        for(let j = 0; j < NUM_COLS; j++)
-        {
+
+    let graph = {};
+    graph.vertices = {};
+    graph.edges = [];
+
+    for (let i = 0; i < NUM_ROWS; i++) {
+        for (let j = 0; j < NUM_COLS; j++) {
             let node = grid[i][j];
 
-            if(!node.isStart && !node.isFinish)
-            {
-                let entry = makeSet();
-                entry.data = node;
-                MST[[i, j]] = entry;
+            if (!node.isStart && !node.isFinish){
+
+                let neighbors = getNeighborWalls(grid, node);
+
+                neighbors.forEach(neighbor => {
+                    let randomWeight = Math.floor(Math.random() * 100);
+                    let edge = {'weight': randomWeight, 'source': [node.row, node.col] , 'dest': [neighbor.row, neighbor.col]};
+                    graph.edges.push(edge);
+                });
+                
+                let vertexSet = makeSet();
+                vertexSet.data = {'node': node, 'position': [i, j]};
+                graph.vertices[[i, j]] = vertexSet;
             }
         }
     }
 
-    while(Object.keys(MST).length > 0)
+    graph.edges = graph.edges.sort((edgeA, edgeB) => edgeA.weight - edgeB.weight);
+
+    let MST = [];
+
+    for (let i = 0; i < graph.edges.length; i++)
     {
-        let keys = Object.keys(MST);
-        let nodeKey = keys[Math.floor(Math.random() * keys.length)];
-        let nodeSet = MST[nodeKey];
-        let node = nodeSet.data;
-    
-        let neighbors = getNeighborWalls(grid, node);
+        let node = graph.edges[i];
 
-        if (neighbors.length > 0){
-            let neighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
-            let neighborNodeset = MST[[neighbor.row, neighbor.col]];
-            if (neighborNodeset !== undefined)
-            {
-                if (find(nodeSet) !== find(neighborNodeset)) tearDownWall(neighborNodeset.data);
-                union(nodeSet, neighborNodeset);
-            }
-        }
+        let nodeASet = graph.vertices[node.source];
+        let nodeBSet = graph.vertices[node.dest];
 
-        delete MST[nodeKey];
+        if(find(nodeASet) !== find(nodeBSet))
+        {
+            MST.push(nodeBSet.data.node);
+        } 
+        union(nodeASet, nodeBSet);
     }
-    
-    grid = invertNodes(grid);
-    openPathForStartAndFinishNodes(grid);
+
+    MST.forEach(node => {tearDownWall(node);});
 
     return grid;
 }
