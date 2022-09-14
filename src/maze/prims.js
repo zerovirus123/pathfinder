@@ -8,7 +8,6 @@ START_NODE_COL,
 import {getNeighborWalls,
        initWalls,
        isNodeAWall,
-       openPathForStartAndFinishNodes,
        tearDownWall}
 from "../maze/utils";
 
