@@ -1,6 +1,6 @@
 # Pathfinder Algorithm Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![example](https://user-images.githubusercontent.com/9401015/189951980-4762693d-3bb5-4435-a319-7e86095eeb9d.png)
 
 Base version of the code implemented by Clement Mihalescu (https://github.com/clementmihailescu/Pathfinding-Visualizer).
 
